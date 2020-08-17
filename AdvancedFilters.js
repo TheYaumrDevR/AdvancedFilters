@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, dialog } = require('electron');
+const { app, BrowserWindow, Menu, dialog, ipcMain } = require('electron');
 const filterDialogController = require('./ioadapters/controllers/FileDialogController');
 
 const url = require('url');
@@ -6,19 +6,28 @@ const path = require('path');
 
 const fileSystem = require('fs');
 
+let dataToSave = {};
+
 function main() {
     injectDependencies();
     app.on('ready', createWindow);
+    setupMessageHandlerForRendererMessages();
 }
 
 function injectDependencies() {
     filterDialogController.initFileDialogController(dialog, fileSystem);
 }
 
+function setupMessageHandlerForRendererMessages() {
+    ipcMain.on('renderer-to-main-async', (event, arg) => {
+        dataToSave = arg;
+    });  
+}
+
 function createWindow() {
     const window = new BrowserWindow({width: 1100, height: 710});
     window.loadURL(url.format({
-        pathname: path.join(__dirname, 'highlightRules.html'),
+        pathname: path.join(__dirname, 'technical/views/highlightRules.html'),
         protocol: 'file:',
         slashes: true
     }));
@@ -54,7 +63,7 @@ function onSaveButtonPressed() {
 }
 
 function onSaveAsButtonPressed() {
-    filterDialogController.saveContentAs();
+    filterDialogController.saveContentAs(dataToSave);
 }
 
 function onExitButtonPressed() {

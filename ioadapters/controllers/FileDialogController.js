@@ -7,11 +7,11 @@ module.exports = {
         fileSystem = fileSystemReference;
     },
     
-    saveContentAs: function() {
-        const content = "";
-    
+    saveContentAs: function(content) {
+        const jsonContent = JSON.stringify(content);
+
         dialog.showSaveDialog((fileName) => {
-            fileSystem.writeFile(fileName, content, (err) => {
+            fileSystem.writeFile(fileName, jsonContent, (err) => {
                 if (err) {
                     alert("An error ocurred creating the file "+ err.message)
                 }
