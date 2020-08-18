@@ -13,9 +13,9 @@ function setupUiActions() {
     midValueSettingTextarea = document.getElementById("midValueSettingText");
     highValueSettingTextarea = document.getElementById("highValueSettingText");
 
-    lowValueSettingTextarea.onchange = onHighlightSettingChanged;
-    midValueSettingTextarea.onchange = onHighlightSettingChanged;
-    highValueSettingTextarea.onchange = onHighlightSettingChanged;
+    lowValueSettingTextarea.oninput = onHighlightSettingChanged;
+    midValueSettingTextarea.oninput = onHighlightSettingChanged;
+    highValueSettingTextarea.oninput = onHighlightSettingChanged;
 }
 
 function onHighlightSettingChanged() {
