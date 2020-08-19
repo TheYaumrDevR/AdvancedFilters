@@ -1,18 +1,16 @@
 let dialog;
 let fileSystem;
-let window;
 
 module.exports = {
-    initFileDialogController: function(dialogReference, fileSystemReference, windowReference) {
+    initFileDialogController: function(dialogReference, fileSystemReference) {
         dialog = dialogReference;
         fileSystem = fileSystemReference;
-        window = windowReference;
     },
     
     saveContentAs: function(content) {
         const jsonContent = JSON.stringify(content);
 
-        dialog.showSaveDialog((fileName) => {
+        dialog.showSaveDialogSync((fileName) => {
             fileSystem.writeFile(fileName, jsonContent, (err) => {
                 if (err) {
                     alert("An error ocurred creating the file "+ err.message)
@@ -23,7 +21,7 @@ module.exports = {
 
     displayAndHandleOpenFileInput: function() {
         const dialogSettings = createOpenDialogSettings();
-        const selectedFilesToOpen = dialog.showOpenDialog(window, dialogSettings);
+        const selectedFilesToOpen = dialog.showOpenDialog(dialogSettings);
         const fileContent = retrieveSelectedFileContent(selectedFilesToOpen);
 
         populateUiWithOpenedFileContent(fileContent);

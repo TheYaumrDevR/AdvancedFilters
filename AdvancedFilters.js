@@ -5,8 +5,6 @@ const url = require('url');
 const path = require('path');
 const fileSystem = require('fs');
 
-let mainWindow;
-
 let dataToSave = {};
 
 function main() {
@@ -20,7 +18,7 @@ function onAppIsReady() {
 }
 
 function injectDependencies() {
-    filterDialogController.initFileDialogController(dialog, fileSystem, mainWindow);
+    filterDialogController.initFileDialogController(dialog, fileSystem);
 }
 
 function setupMessageHandlerForRendererMessages() {
@@ -30,7 +28,7 @@ function setupMessageHandlerForRendererMessages() {
 }
 
 function createWindow() {
-    mainWindow = new BrowserWindow({width: 1100, height: 710});
+    const mainWindow = new BrowserWindow({width: 1100, height: 710});
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'technical/views/highlightRules.html'),
         protocol: 'file:',
