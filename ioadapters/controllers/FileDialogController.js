@@ -9,8 +9,9 @@ module.exports = {
     
     saveContentAs: function(content) {
         const jsonContent = JSON.stringify(content);
+        const dialogSettings = createSaveAsDialogSettings();
 
-        dialog.showSaveDialogSync((fileName) => {
+        dialog.showSaveDialog(dialogSettings, (fileName) => {
             fileSystem.writeFile(fileName, jsonContent, (err) => {
                 if (err) {
                     alert("An error ocurred creating the file "+ err.message)
@@ -26,6 +27,20 @@ module.exports = {
 
         populateUiWithOpenedFileContent(fileContent);
     }
+}
+
+function createSaveAsDialogSettings() {
+    const result = {
+        properties: ['createDirectory', 'showOverwriteConfirmation'],
+        filters: [
+            {
+                name: 'Advanced Filters Combination Setup',
+                extensions: ['json']
+            }
+        ]
+    };  
+    
+    return result;
 }
 
 function createOpenDialogSettings() {
