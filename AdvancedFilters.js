@@ -3,19 +3,24 @@ const filterDialogController = require('./ioadapters/controllers/FileDialogContr
 
 const url = require('url');
 const path = require('path');
-
 const fileSystem = require('fs');
+
+let mainWindow;
 
 let dataToSave = {};
 
 function main() {
-    injectDependencies();
-    app.on('ready', createWindow);
+    app.on('ready', onAppIsReady);
     setupMessageHandlerForRendererMessages();
 }
 
+function onAppIsReady() {
+    createWindow();
+    injectDependencies();
+}
+
 function injectDependencies() {
-    filterDialogController.initFileDialogController(dialog, fileSystem);
+    filterDialogController.initFileDialogController(dialog, fileSystem, mainWindow);
 }
 
 function setupMessageHandlerForRendererMessages() {
@@ -25,8 +30,8 @@ function setupMessageHandlerForRendererMessages() {
 }
 
 function createWindow() {
-    const window = new BrowserWindow({width: 1100, height: 710});
-    window.loadURL(url.format({
+    mainWindow = new BrowserWindow({width: 1100, height: 710});
+    mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'technical/views/highlightRules.html'),
         protocol: 'file:',
         slashes: true
@@ -55,11 +60,11 @@ function onNewFileButtonPressed() {
 }
 
 function onOpenButtonPressed() {
-
+    filterDialogController.displayAndHandleOpenFileInput();
 }
 
 function onSaveButtonPressed() {
-
+    
 }
 
 function onSaveAsButtonPressed() {
