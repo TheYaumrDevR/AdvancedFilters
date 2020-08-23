@@ -1,9 +1,12 @@
 const { app, BrowserWindow, Menu, dialog, ipcMain } = require('electron');
 const filterDialogController = require('./ioadapters/controllers/FileDialogController');
+const highlightRulesRenderThreadGateway = require('./ioadapters/gateways/HighlightRulesRenderThreadGateway');
 
 const url = require('url');
 const path = require('path');
 const fileSystem = require('fs');
+
+let mainWindow;
 
 let dataToSave = {};
 
@@ -19,6 +22,7 @@ function onAppIsReady() {
 
 function injectDependencies() {
     filterDialogController.initFileDialogController(dialog, fileSystem);
+    highlightRulesRenderThreadGateway.construct(mainWindow);
 }
 
 function setupMessageHandlerForRendererMessages() {
@@ -28,7 +32,7 @@ function setupMessageHandlerForRendererMessages() {
 }
 
 function createWindow() {
-    const mainWindow = new BrowserWindow({width: 1100, height: 710});
+    mainWindow = new BrowserWindow({width: 1100, height: 710});
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'technical/views/highlightRules.html'),
         protocol: 'file:',

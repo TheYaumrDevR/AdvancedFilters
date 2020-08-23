@@ -1,6 +1,8 @@
 let dialog;
 let fileSystem;
 
+const setupUserInterfaceWithOpenedDataInteractor = require('../../interactors/SetupUserInterfaceWithOpenedFileDataInteractor');
+
 module.exports = {
     initFileDialogController: function(dialogReference, fileSystemReference) {
         dialog = dialogReference;
@@ -67,6 +69,6 @@ function retrieveSelectedFileContent(openDialogFiles) {
 }
 
 function populateUiWithOpenedFileContent(fileContent) {
-    // Send to use case which parses everything using property checks
-    // Then sends parsed to all user interfaces
+    const parsedFileContent = JSON.parse(fileContent);
+    setupUserInterfaceWithOpenedDataInteractor.setupUserInterfaceWithLoadedData(parsedFileContent);
 }

@@ -1,4 +1,5 @@
 const updatePersistableDataInteractor = require('../../interactors/UpdatePersistableDataInteractor');
+const { ipcRenderer } = require('electron');
 
 let lowValueSettingTextarea;
 let midValueSettingTextarea;
@@ -6,6 +7,7 @@ let highValueSettingTextarea
 
 function main() {
     setupUiActions();
+    setupIpcListeners();
 }
 
 function setupUiActions() {
@@ -25,6 +27,24 @@ function onHighlightSettingChanged() {
     highLightingRules.highValueHighlightingRule = highValueSettingTextarea.value;
 
     updatePersistableDataInteractor.prepareHighlightingRulesForFuturePersistence(highLightingRules);
+}
+
+function setupIpcListeners() {
+    ipcRenderer.on('populate-low-value-highlight-rule', populateLowValueHiglightRuleTextareaFromMainProcessEvent);
+    ipcRenderer.on('populate-mid-value-highlight-rule', populateMidValueHiglightRuleTextareaFromMainProcessEvent);
+    ipcRenderer.on('populate-high-value-highlight-rule', populateHighValueHiglightRuleTextareaFromMainProcessEvent);
+}
+
+function populateLowValueHiglightRuleTextareaFromMainProcessEvent(event, ...args) {
+    lowValueSettingTextarea.value = args[0];
+}
+
+function populateMidValueHiglightRuleTextareaFromMainProcessEvent(event, ...args) {
+    midValueSettingTextarea.value = args[0];
+}
+
+function populateHighValueHiglightRuleTextareaFromMainProcessEvent(event, ...args) {
+    highValueSettingTextarea.value = args[0];
 }
 
 main();
