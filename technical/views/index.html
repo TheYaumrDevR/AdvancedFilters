@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css"/>
+        <link rel="stylesheet" href="highlightRules.css"/>
+        <meta charset = "UTF-8">
+        <title>Advanced Filters</title>
+    </head>
+
+    <body>
+        <nav class="navbar">
+            <ul>
+                <li><a id="combinationsLink" class="navlink" href="#combinations">Combinations</a></li>
+                <li><a id="instructionsLink" class="navlink" href="#instructions">Instructions</a></li>
+            </ul>
+        </nav>
+
+        <div class="wrapper">
+            <section id="highlightInstructionsManagement">
+                <h1>Filter Highlighting Instructions Management</h1>
+                Manage your filter highlighting instructions here. They control how the item looks and sounds when dropped on the ground.
+                <p/>
+                <form class="user-form">
+                    <div class="form-input">
+                        <label for="lowValueSettingText">Low Value Item Highlight Setting:</label>
+                        <textarea id="lowValueSettingText" rows="8"></textarea>
+                    </div>
+                    <p/>
+                    <div class="form-input">
+                        <label for="midValueSettingText">Mid Value Item Highlight Setting:</label>
+                        <textarea id="midValueSettingText" rows="8"></textarea>
+                    </div>
+                    <p/>
+                    <div class="form-input">
+                        <label for="highValueSettingText">High Value Item Highlight Setting:</label>
+                        <textarea id="highValueSettingText" rows="8"></textarea>
+                    </div>
+                    <p/>
+                </form>
+            </section>
+        </div>
+
+        <script type="text/javascript" src="../../ioadapters/controllers/WrapperPageController.js"></script>
+        <script type="text/javascript" src="../../ioadapters/controllers/HighlightRulesController.js"></script>
+    </body>
+</html>

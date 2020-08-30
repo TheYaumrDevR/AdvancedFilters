@@ -32,9 +32,9 @@ function setupMessageHandlerForRendererMessages() {
 }
 
 function createWindow() {
-    mainWindow = new BrowserWindow({width: 1100, height: 710});
+    mainWindow = new BrowserWindow({width: 1270, height: 980});
     mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'technical/views/highlightRules.html'),
+        pathname: path.join(__dirname, 'technical/views/index.html'),
         protocol: 'file:',
         slashes: true
     }));
