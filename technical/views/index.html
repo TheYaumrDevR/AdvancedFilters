@@ -10,8 +10,9 @@
     <body>
         <nav class="navbar">
             <ul>
-                <li><a id="combinationsLink" class="navlink" href="#combinations">Combinations</a></li>
-                <li><a id="instructionsLink" class="navlink" href="#instructions">Instructions</a></li>
+                <li><a id="affixesLink" class="navlink" href="#affixes">Affixes</a></li>
+                <li><a id="highlightsLink" class="navlink" href="#highlights">Highlight Styles</a></li>
+                <li><a id="resultLink" class="navlink" href="#result">Result Filter</a></li>
             </ul>
         </nav>
 
@@ -20,7 +21,7 @@
                 <h1>Filter Highlighting Instructions Management</h1>
                 Manage your filter highlighting instructions here. They control how the item looks and sounds when dropped on the ground.
                 <p/>
-                <form class="user-form">
+                <form class="highlights-form">
                     <div class="form-input">
                         <label for="lowValueSettingText">Low Value Item Highlight Setting:</label>
                         <textarea id="lowValueSettingText" rows="8"></textarea>
@@ -36,6 +37,116 @@
                         <textarea id="highValueSettingText" rows="8"></textarea>
                     </div>
                     <p/>
+                </form>
+            </section>
+
+            <section id="affixPoolInput">
+                <h1>Affix Pool Setup</h1>
+                Setup your affixes from which the filter combinations will be created. Each line can contain multiple tiers of the same affix to filter on all of them.
+                <form class="affixes-form">
+                    <fieldset>
+                        <legend>Weapon</legend> 
+                        <label for="weapon-affixes">Affix Combination Pool:</label>
+                        <textarea id="weapon-affixes" rows="6"></textarea><p/>
+                    </fieldset>
+                </form>
+                <form class="affixes-form">
+                    <fieldset>
+                        <legend>Helmet</legend> 
+                        <label for="helmet-affixes">Affix Combination Pool:</label>
+                        <textarea id="helmet-affixes" rows="6"></textarea><p/>
+                    </fieldset>
+                </form>
+                <form class="affixes-form">
+                    <fieldset>
+                        <legend>Body Armour</legend> 
+                        <label for="body-affixes">Affix Combination Pool:</label>
+                        <textarea id="body-affixes" rows="6"></textarea><p/>
+                    </fieldset>
+                </form>
+                <form class="affixes-form">
+                    <fieldset>
+                        <legend>Boots</legend> 
+                        <label for="boots-affixes">Affix Combination Pool:</label>
+                        <textarea id="boots-affixes" rows="6"></textarea><p/>
+                    </fieldset>
+                </form>
+                <form class="affixes-form">
+                    <fieldset>
+                        <legend>Gloves</legend> 
+                        <label for="gloves-affixes">Affix Combination Pool:</label>
+                        <textarea id="gloves-affixes" rows="6"></textarea><p/>
+                    </fieldset>
+                </form>
+                <form class="affixes-form">
+                    <fieldset>
+                        <legend>Amulets</legend> 
+                        <label for="amulets-affixes">Affix Combination Pool:</label>
+                        <textarea id="amulets-affixes" rows="6"></textarea><p/>
+                    </fieldset>
+                </form>
+                <form class="affixes-form">
+                    <fieldset>
+                        <legend>Rings</legend> 
+                        <label for="rings-affixes">Affix Combination Pool:</label>
+                        <textarea id="rings-affixes" rows="6"></textarea><p/>
+                    </fieldset>
+                </form>
+                <form class="affixes-form">
+                    <fieldset>
+                        <legend>Belts</legend> 
+                        <label for="belts-affixes">Affix Combination Pool:</label>
+                        <textarea id="belts-affixes" rows="6"></textarea><p/>
+                    </fieldset>
+                </form>
+                <form class="affixes-form">
+                    <fieldset>
+                        <legend>Crimson Jewel</legend> 
+                        <label for="crimson-jewel-affixes">Affix Combination Pool:</label>
+                        <textarea id="crimson-jewel-affixes" rows="6"></textarea><p/>
+                    </fieldset>
+                </form>
+                <form class="affixes-form">
+                    <fieldset>
+                        <legend>Viridian Jewel</legend> 
+                        <label for="viridian-jewel-affixes">Affix Combination Pool:</label>
+                        <textarea id="viridian-jewel-affixes" rows="6"></textarea><p/>
+                    </fieldset>
+                </form>
+                <form class="affixes-form">
+                    <fieldset>
+                        <legend>Cobalt Jewel</legend> 
+                        <label for="cobalt-jewel-affixes">Affix Combination Pool:</label>
+                        <textarea id="cobalt-jewel-affixes" rows="6"></textarea><p/>
+                    </fieldset>
+                </form>
+                <form class="affixes-form">
+                    <fieldset>
+                        <legend>Murderous Eye Jewel</legend> 
+                        <label for="murderous-eye-jewel-affixes">Affix Combination Pool:</label>
+                        <textarea id="murderous-eye-jewel-affixes" rows="6"></textarea><p/>
+                    </fieldset>
+                </form>
+                <form class="affixes-form">
+                    <fieldset>
+                        <legend>Searching Eye Jewel</legend> 
+                        <label for="searching-eye-jewel-affixes">Affix Combination Pool:</label>
+                        <textarea id="searching-eye-jewel-affixes" rows="6"></textarea><p/>
+                    </fieldset>
+                </form>
+                <form class="affixes-form">
+                    <fieldset>
+                        <legend>Hypnotic Eye Jewel</legend> 
+                        <label for="hypnotic-eye-jewel-affixes">Affix Combination Pool:</label>
+                        <textarea id="hypnotic-eye-jewel-affixes" rows="6"></textarea><p/>
+                    </fieldset>
+                </form>
+                <form class="affixes-form">
+                    <fieldset>
+                        <legend>Ghastly Eye Jewel</legend> 
+                        <label for="ghastly-eye-jewel-affixes">Affix Combination Pool:</label>
+                        <textarea id="ghastly-eye-jewel-affixes" rows="6"></textarea><p/>
+                    </fieldset>
                 </form>
             </section>
         </div>

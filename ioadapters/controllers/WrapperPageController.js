@@ -1,23 +1,37 @@
+let affixesLink;
+let highlightsLink;
+let resultLink;
+
 function main() {
     setupUiActions();
 }
 
 function setupUiActions() {
-    const combinationsLink = document.getElementById("combinationsLink");
-    const instructionsLink = document.getElementById("instructionsLink");
+    affixesLink = document.getElementById("affixesLink");
+    highlightsLink = document.getElementById("highlightsLink");
+    resultLink = document.getElementById("resultLink");
 
-    combinationsLink.onclick = onCombinationsLinkClicked;
-    instructionsLink.onclick = onInstructionsLinkClicked;
+    affixesLink.onclick = onAffixesinkClicked;
+    highlightsLink.onclick = onHighlightsLinkClicked;
+    resultLink.onclick = onResultLinkClicked;
 }
 
-function onCombinationsLinkClicked() {
-    combinationsLink.className += ' active';
-    instructionsLink.className = 'navlink';
+function onAffixesinkClicked() {
+    affixesLink.className += ' active';
+    highlightsLink.className = 'navlink';
+    resultLink.className = 'navlink';
 }
 
-function onInstructionsLinkClicked() {
-    instructionsLink.className += ' active';
-    combinationsLink.className = 'navlink';
+function onHighlightsLinkClicked() {
+    highlightsLink.className += ' active';
+    affixesLink.className = 'navlink';
+    resultLink.className = 'navlink';
+}
+
+function onResultLinkClicked() {
+    affixesLink.className = ' navlink';
+    highlightsLink.className = 'navlink';
+    resultLink.className += ' active';
 }
 
 main();
