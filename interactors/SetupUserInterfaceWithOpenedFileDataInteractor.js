@@ -1,4 +1,5 @@
 const highLightRulesRendererThreadGateway = require('../ioadapters/gateways/HighlightRulesRenderThreadGateway');
+const setupLoadedDataAsPersistedDataInteractor = require('../interactors/UpdatePersistableDataInteractor');
 
 module.exports = {
 

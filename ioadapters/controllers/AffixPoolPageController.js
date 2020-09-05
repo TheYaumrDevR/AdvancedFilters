@@ -17,7 +17,6 @@ let hypnoticEyeJewelAffixesTextArea;
 let ghastlyEyeJewelAffixesTextArea;
 
 function setupAffixPoolPageController() {
-    alert("main");
     setupUiActions();
 }
 

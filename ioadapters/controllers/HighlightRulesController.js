@@ -37,14 +37,17 @@ function setupIpcListeners() {
 
 function populateLowValueHiglightRuleTextareaFromMainProcessEvent(event, ...args) {
     lowValueSettingTextarea.value = args[0];
+    onHighlightSettingChanged();
 }
 
 function populateMidValueHiglightRuleTextareaFromMainProcessEvent(event, ...args) {
     midValueSettingTextarea.value = args[0];
+    onHighlightSettingChanged();
 }
 
 function populateHighValueHiglightRuleTextareaFromMainProcessEvent(event, ...args) {
     highValueSettingTextarea.value = args[0];
+    onHighlightSettingChanged();
 }
 
 main();
