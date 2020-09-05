@@ -22,6 +22,19 @@ module.exports = {
     setLowValueHighlightSetting: function(value) {
         result.highlightSettings.lowValueSetting = value;
     },
+
+    newAffixPool: function() {
+        result.equipmentTypesWithAffixPoolsForCombination = [];
+    },
+
+    setAffixPoolForItemType: function(pool, typeOfItem) {
+        const itemWithAffixPool = {
+            itemType: typeOfItem,
+            affixPool: pool
+        };
+
+        result.equipmentTypesWithAffixPoolsForCombination.push(itemWithAffixPool);
+    },
     
     build: function() {
         return result;
