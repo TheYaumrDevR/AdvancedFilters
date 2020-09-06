@@ -1,6 +1,7 @@
 const { app, BrowserWindow, Menu, dialog, ipcMain } = require('electron');
 const filterDialogController = require('./ioadapters/controllers/FileDialogController');
 const highlightRulesRenderThreadGateway = require('./ioadapters/gateways/HighlightRulesRenderThreadGateway');
+const affixPoolUiGateway = require('./ioadapters/gateways/AffixPoolUiGateway');
 
 const url = require('url');
 const path = require('path');
@@ -23,6 +24,7 @@ function onAppIsReady() {
 function injectDependencies() {
     filterDialogController.initFileDialogController(dialog, fileSystem);
     highlightRulesRenderThreadGateway.construct(mainWindow);
+    affixPoolUiGateway.construct(mainWindow);
 }
 
 function setupMessageHandlerForRendererMessages() {

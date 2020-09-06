@@ -1,11 +1,15 @@
 const highLightRulesRendererThreadGateway = require('../ioadapters/gateways/HighlightRulesRenderThreadGateway');
-const setupLoadedDataAsPersistedDataInteractor = require('../interactors/UpdatePersistableDataInteractor');
+const affixPoolUiGateway = require('../ioadapters/gateways/AffixPoolUiGateway');
 
 module.exports = {
 
     setupUserInterfaceWithLoadedData: function(loadedData) {
         if (loadedData.hasOwnProperty('highlightSettings')) {
             sendHighlightSettingsToHighlightSettingsUi(loadedData.highlightSettings);
+        }
+
+        if (loadedData.hasOwnProperty('equipmentTypesWithAffixPoolsForCombination')) {
+            sendAffixPoolToAffixPoolUi(loadedData.equipmentTypesWithAffixPoolsForCombination);
         }
     }
 }
@@ -22,4 +26,10 @@ function sendHighlightSettingsToHighlightSettingsUi(highlightSettings) {
     if (highlightSettings.hasOwnProperty('lowValueSetting')) {
         highLightRulesRendererThreadGateway.fillHighlightRulesUiWithLowValueHighlightRule(highlightSettings.lowValueSetting);
     }    
+}
+
+function sendAffixPoolToAffixPoolUi(affixPool) {
+    if (Array.isArray(affixPool)) {
+        affixPoolUiGateway.fillAffixPoolUiWithAffixes(affixPool);
+    }
 }
