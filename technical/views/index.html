@@ -3,6 +3,7 @@
     <head>
         <link rel="stylesheet" href="index.css"/>
         <link rel="stylesheet" href="highlightRules.css"/>
+        <link rel="stylesheet" href="resultPage.css"/>
         <meta charset = "UTF-8">
         <title>Advanced Filters</title>
     </head>
@@ -147,6 +148,24 @@
                         <label for="ghastly-eye-jewel-affixes">Affix Combination Pool:</label>
                         <textarea id="ghastly-eye-jewel-affixes" rows="6"></textarea><p/>
                     </fieldset>
+                </form>
+            </section>
+
+            <section id="result">
+                <h1>Result Filter</h1>
+                Generate your filters here. The filter will highlight items. The item will be highlighted with the chosen highlight rule. The item will be highlighted if it matches at least one result combinations. Choose how many affixes are combined into a matching rule.
+                <form class="result-form">
+                    <label for="result-filter-area">Result filter instructions:</label>
+                    <textarea readonly id="result-filter-area" rows="24"></textarea><p/>
+                    <label for="result-highlight-setting-selection-listbox">Result filter highlight setting:</label>
+                    <select id="result-highlight-setting-selection-listbox">
+                        <option value="low-value-highlight">Low Value Highlight Setting</option>
+                        <option value="low-value-highlight">Mid Value Highlight Setting</option>
+                        <option value="low-value-highlight">High Value Highlight Setting</option>
+                    </select><p/>
+                    <label for="combination-amount-input">Amount of combined affixes:</label>
+                    <input type="text" id="combination-amount-input"><p/>
+                    <button type="button" id="generate-filter">Generate Result Filter</button>
                 </form>
             </section>
         </div>
