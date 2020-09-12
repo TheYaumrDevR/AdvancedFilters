@@ -34,7 +34,7 @@ function removeCombinationsWithMoreThanThreePrefixesOrSuffixes(allCombinations) 
 }
 
 function isSuffix(affix) {
-    return affix.startsWith('of ');
+    return affix.startsWith('"of ');
 }
 
 function combineRecursive(affixes, k) {

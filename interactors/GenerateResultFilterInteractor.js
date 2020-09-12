@@ -1,4 +1,5 @@
 const affixCombinator = require('../core/AffixCombinator');
+const filterRuleHeaderCreator = require('../core/FilterRuleHeaderCreator');
 const resultPagePresenter = require('../ioadapters/presenters/ResultPagePresenter');
 
 module.exports = {
@@ -9,7 +10,14 @@ module.exports = {
             const combinedAffixes = equipmentsWithAffixPools.map(itemTypeWithAffixPool => {
                 if (itemTypeWithAffixPool.affixes != null) {
                     affixCombinator.setupAffixCombinator(itemTypeWithAffixPool.affixes);
-                    return affixCombinator.combine(kChooseNumber);
+                    const combinedAffixes = affixCombinator.combine(kChooseNumber);
+                    const result = combinedAffixes.map(singleCombinedAffixes => {
+                        return { 
+                            itemType: itemTypeWithAffixPool.itemType,
+                            affixCombination: singleCombinedAffixes
+                        }
+                    });
+                    return result;
                 }
 
                 return [];
@@ -25,17 +33,35 @@ module.exports = {
 function transformCombinedAffixesToOutputFormat(combinedAffixesPerItem) {
     const resultWithEmptyItemCombinations = combinedAffixesPerItem.map(allCombinationsForItem => {
         return allCombinationsForItem.map(oneAffixCombination => {
-            return oneAffixCombination.reduce((stringifiedAffixes, currentAffix) => {
-                return stringifiedAffixes + '\n' + currentAffix;
-            });
+            const result = {
+                itemType: oneAffixCombination.itemType,
+                affixCombination: ''
+            }
+
+            const affixCombinationString = oneAffixCombination.affixCombination.reduce((stringifiedAffixes, currentAffix) => {
+                if (stringifiedAffixes === '') {
+                    return '\tHasExplicitMod ' + currentAffix;
+                }
+
+                return stringifiedAffixes + '\n\tHasExplicitMod ' + currentAffix;
+            }, '');
+
+            result.affixCombination = affixCombinationString;
+            return result;
         });
     });
 
     const resultWithInnerArray = resultWithEmptyItemCombinations.filter(itemCombination => itemCombination.length > 0);
     const resultArrayOfIndividualItemTypes = resultWithInnerArray.map(innerFilterArrayForItemType => {
         return innerFilterArrayForItemType.reduce((stringifiedFilters, currentFilter) => {
-            return stringifiedFilters + '\n\n' + currentFilter;
-        });
+            const filterHeader = filterRuleHeaderCreator.mapItemTypeToFilterRuleHeader(currentFilter.itemType);
+
+            if (stringifiedFilters === '') {
+                return filterHeader + currentFilter.affixCombination;
+            }
+
+            return stringifiedFilters + '\n\n' + filterHeader + currentFilter.affixCombination;
+        }, '');
     });
 
     const result = resultArrayOfIndividualItemTypes.reduce((finalLootFilterString, itemSpecificLootFilter) => {
