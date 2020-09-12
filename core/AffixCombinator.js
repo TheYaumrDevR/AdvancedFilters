@@ -6,8 +6,35 @@ module.exports = {
     },
 
     combine: function(k) {
-        return combineRecursive(affixesToCombine, k);
+        const allCombinations =  combineRecursive(affixesToCombine, k);
+
+        if (k > 3) {
+            return removeCombinationsWithMoreThanThreePrefixesOrSuffixes(allCombinations);
+        }
+
+        return allCombinations;
     }
+}
+
+function removeCombinationsWithMoreThanThreePrefixesOrSuffixes(allCombinations) {
+    return allCombinations.filter(combination => {
+        let amountOfPrefixes = 0;
+        let amountOfSuffixes = 0;
+
+        for (let i = 0; i < combination.length; i++) {
+            if (isSuffix(combination[i])) {
+                amountOfSuffixes++;
+            } else {
+                amountOfPrefixes++;
+            }
+        }
+
+        return amountOfPrefixes < 4 && amountOfSuffixes < 4;
+    });
+}
+
+function isSuffix(affix) {
+    return affix.startsWith('of ');
 }
 
 function combineRecursive(affixes, k) {
