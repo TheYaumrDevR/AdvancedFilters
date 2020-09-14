@@ -1,7 +1,9 @@
 const generateResultFilterInteractor = require('../../interactors/GenerateResultFilterInteractor');
+const highLightInstructionRetriever = require('../../ioadapters/controllers/SelectedHighlightOptionToHighlightSettingsMapper');
 
 let generateFilterButton;
 let kNumberInputField;
+let highLightInstructionChoiceDropDown;
 
 function resultPageControllerMain() {
     setupUiActions();
@@ -12,6 +14,7 @@ function setupUiActions() {
     generateFilterButton.addEventListener("click", onGenerateFilterButtonClicked);
 
     kNumberInputField = document.getElementById("combination-amount-input");
+    highLightInstructionChoiceDropDown = document.getElementById("result-highlight-setting-selection-listbox");
 }
 
 function onGenerateFilterButtonClicked() {
@@ -47,22 +50,25 @@ function onGenerateFilterButtonClicked() {
     const hypnoticEyeJewelAffixes = hypnoticEyeJewelAffixesText.match(/[^\r\n]+/g);
     const ghastlyEyeJewelAffixes = ghatslyEyeJewelAffixesText.match(/[^\r\n]+/g);
 
+    const selectedHighLightInstructionId = highLightInstructionChoiceDropDown.options[highLightInstructionChoiceDropDown.selectedIndex].value;
+    const highLightInstructions = highLightInstructionRetriever.getHighlightInstructionBasedOnSelectedHighlightInstruction(selectedHighLightInstructionId);
+
     const equipmentTypesWithAffixPool = [];
-    equipmentTypesWithAffixPool.push({itemType: 'weapon', affixes: weaponAffixes});
-    equipmentTypesWithAffixPool.push({itemType: 'helmet', affixes: helmetAffixes});
-    equipmentTypesWithAffixPool.push({itemType: 'body', affixes: bodyAffixes});
-    equipmentTypesWithAffixPool.push({itemType: 'boots', affixes: bootsAffixes});
-    equipmentTypesWithAffixPool.push({itemType: 'gloves', affixes: glovesAffixes});
-    equipmentTypesWithAffixPool.push({itemType: 'amulets', affixes: amuletAffixes});
-    equipmentTypesWithAffixPool.push({itemType: 'rings', affixes: ringsAffixes});
-    equipmentTypesWithAffixPool.push({itemType: 'belts', affixes: beltsAffixes});
-    equipmentTypesWithAffixPool.push({itemType: 'crimsonJewel', affixes: crimsonJewelAffixes});
-    equipmentTypesWithAffixPool.push({itemType: 'viridianJewel', affixes: viridianJewelAffixes});
-    equipmentTypesWithAffixPool.push({itemType: 'cobaltJewel', affixes: cobaltJewelAffixes});
-    equipmentTypesWithAffixPool.push({itemType: 'murderousEyeJewel', affixes: murderousEyeJewelAffixes});
-    equipmentTypesWithAffixPool.push({itemType: 'searchingEyeJewel', affixes: searchingEyeJewelAffixes});
-    equipmentTypesWithAffixPool.push({itemType: 'hypnoticEyeJewel', affixes: hypnoticEyeJewelAffixes});
-    equipmentTypesWithAffixPool.push({itemType: 'ghastlyEyeJewel', affixes: ghastlyEyeJewelAffixes});
+    equipmentTypesWithAffixPool.push({itemType: 'weapon', affixes: weaponAffixes, highlightInstruction: highLightInstructions});
+    equipmentTypesWithAffixPool.push({itemType: 'helmet', affixes: helmetAffixes, highlightInstruction: highLightInstructions});
+    equipmentTypesWithAffixPool.push({itemType: 'body', affixes: bodyAffixes, highlightInstruction: highLightInstructions});
+    equipmentTypesWithAffixPool.push({itemType: 'boots', affixes: bootsAffixes, highlightInstruction: highLightInstructions});
+    equipmentTypesWithAffixPool.push({itemType: 'gloves', affixes: glovesAffixes, highlightInstruction: highLightInstructions});
+    equipmentTypesWithAffixPool.push({itemType: 'amulets', affixes: amuletAffixes, highlightInstruction: highLightInstructions});
+    equipmentTypesWithAffixPool.push({itemType: 'rings', affixes: ringsAffixes, highlightInstruction: highLightInstructions});
+    equipmentTypesWithAffixPool.push({itemType: 'belts', affixes: beltsAffixes, highlightInstruction: highLightInstructions});
+    equipmentTypesWithAffixPool.push({itemType: 'crimsonJewel', affixes: crimsonJewelAffixes, highlightInstruction: highLightInstructions});
+    equipmentTypesWithAffixPool.push({itemType: 'viridianJewel', affixes: viridianJewelAffixes, highlightInstruction: highLightInstructions});
+    equipmentTypesWithAffixPool.push({itemType: 'cobaltJewel', affixes: cobaltJewelAffixes, highlightInstruction: highLightInstructions});
+    equipmentTypesWithAffixPool.push({itemType: 'murderousEyeJewel', affixes: murderousEyeJewelAffixes, highlightInstruction: highLightInstructions});
+    equipmentTypesWithAffixPool.push({itemType: 'searchingEyeJewel', affixes: searchingEyeJewelAffixes, highlightInstruction: highLightInstructions});
+    equipmentTypesWithAffixPool.push({itemType: 'hypnoticEyeJewel', affixes: hypnoticEyeJewelAffixes, highlightInstruction: highLightInstructions});
+    equipmentTypesWithAffixPool.push({itemType: 'ghastlyEyeJewel', affixes: ghastlyEyeJewelAffixes, highlightInstruction: highLightInstructions});
 
     const kChooseNumber = parseInt(kNumberInputField.value);
 

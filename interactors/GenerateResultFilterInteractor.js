@@ -14,7 +14,8 @@ module.exports = {
                     const result = combinedAffixes.map(singleCombinedAffixes => {
                         return { 
                             itemType: itemTypeWithAffixPool.itemType,
-                            affixCombination: singleCombinedAffixes
+                            affixCombination: singleCombinedAffixes,
+                            highlightInstruction: itemTypeWithAffixPool.highlightInstruction
                         }
                     });
                     return result;
@@ -35,6 +36,7 @@ function transformCombinedAffixesToOutputFormat(combinedAffixesPerItem) {
         return allCombinationsForItem.map(oneAffixCombination => {
             const result = {
                 itemType: oneAffixCombination.itemType,
+                highlightInstruction: oneAffixCombination.highlightInstruction,
                 affixCombination: ''
             }
 
@@ -57,10 +59,10 @@ function transformCombinedAffixesToOutputFormat(combinedAffixesPerItem) {
             const filterHeader = filterRuleHeaderCreator.mapItemTypeToFilterRuleHeader(currentFilter.itemType);
 
             if (stringifiedFilters === '') {
-                return filterHeader + currentFilter.affixCombination;
+                return filterHeader + currentFilter.affixCombination + '\n' + currentFilter.highlightInstruction;;
             }
 
-            return stringifiedFilters + '\n\n' + filterHeader + currentFilter.affixCombination;
+            return stringifiedFilters + '\n\n' + filterHeader + currentFilter.affixCombination + '\n' + currentFilter.highlightInstruction;
         }, '');
     });
 
